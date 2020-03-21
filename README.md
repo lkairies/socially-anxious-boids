@@ -42,6 +42,4 @@ It is indicated that in more complex situations, such as obstacle avoidance, acc
 
 For the application in CGI, a global direction vector can be used to guarantee an average motion in the defined direction by the whole flock.
 
-## TODO
-
- - Obstacle avoidance
+One of the most interesting features of swarms is their interaction with other objects such as obstacles or predators. Reynolds indicates to use the steer-to-avoid method for simulating this: If an object is in sight, i.e. not only close by but also in the direction of travel, the closest edge  of the obstacleis computed. The boid's direction is then changed in such a manner that a minimum distance from the obstacle is kept.
