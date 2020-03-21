@@ -34,4 +34,14 @@ Reynolds describes his notion of geometric flight, which is not crucial for our 
  - "Velocity Matching: attempt to match velocity with nearby flockmates"
  - "Flock Centering: attempt to stay close to nearby flockmates"
 
-The explicit implementation is not given. We aim at creating a parametric model of those rules.
+The explicit implementation is not given. We aim at creating a parametric model of those rules as implied by Reynolds:
+
+"The three behavioral urges associated with flocking (and others to be discussed below) each produce an isolated suggestion about which way to steer the boid. These are expressed as acceleration requests. Each behavior says: "if I were in charge, I would accelerate in that direction." The acceleration request is in terms of a 3D vector that, by system convention, is truncated to unit magnitude or less. Each behavior has several parameters that control its function; one is a "strength," a fractional value between zero and one that can further attenuate the acceleration request. It is up to the navigation module of the boid brain to collect all relevant acceleration requests and then determine a single behaviorally desired acceleration. It must combine, prioritize, and arbitrate between potentially conflicting urges. The pilot module takes the acceleration desired by the navigation module and passes it to the flight module, which attempts to fly in that direction."
+
+It is indicated that in more complex situations, such as obstacle avoidance, acceleration should not be given by a simple weighted average of the behavioural urges (rules) but by a prioritization of the rules. Activation functions or weights as functions of e.g. mutual distance or distance to obstacles could also be considered. In Reynolds' paper the weights for attraction/repulsion to nearest neighbours are chosen as a function of the inverse squared distance.
+
+For the application in CGI, a global direction vector can be used to guarantee an average motion in the defined direction by the whole flock.
+
+## TODO
+
+ - Obstacle avoidance
