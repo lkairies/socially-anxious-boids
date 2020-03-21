@@ -1,35 +1,55 @@
 from tkinter import *
-from ui.parameter import Parameter
-# key: name, value: default value
-parameters = {
-    "param1": 0,
-    "param2": 1
-}
+from parameter import Parameter
 
-parameter_entries = {}
+class GUI:
+    # key: name, value: default value
+    parameters = {
+        "param1": 0,
+        "param2": 1
+    }
 
-def create_window():
-    window = Tk()
-    window.title("Socially Anxious Boids")
+    parameter_entries = {}
 
-    parameter_label = Label(window, text="Parameters")
-    parameter_label.grid(row=0, column=0, pady=20)
+    def __init__(self, parameters):
+        self.parameters = parameters
+        self.window = self.create_window()
 
-    for i, name, value in enumerate(parameters.items()):
-        entry = Entry(window)
-        entry.grid(row=0, column=i+1, pady=20)
-        label = Label(window, text=name)
-        label.grid(row=1, column=i+1, pady=20)
-        param = Parameter(name, entry)
-        param.setValue(value)
-        parameter_entries[name] = param
+    def apply_action(self):
+        for name, value in self.parameter_entries.items():
+            print(name + ": " + str(value.get_value()))
 
-    apply_button = Button(window, text="apply")
-    apply_button.grid(row=0, column=len(parameters) + 1)
-    return window
+    def create_window(self):
+        window = Tk()
+        window.title("Socially Anxious Boids")
+
+        # parameter input
+        for i, item in enumerate(self.parameters.items()):
+            label = Label(window, text=item[0])
+            label.grid(row=i*2, column=0, pady=0)
+            entry = Entry(window)
+            entry.grid(row=i*2+1, column=0, pady=5)
+            param = Parameter(item[0], entry)
+            param.set_value(item[1])
+            self.parameter_entries[item[0]] = param
+
+        # apply button
+        apply_button = Button(window, text="apply", command=self.apply_action)
+        apply_button.grid(row=len(self.parameters) * 2 + 1, column=0)
+
+        # canvas
+        self.canvas = Canvas(window, width=500, height=500, background="grey")
+
+        self.canvas.grid(column=1, row=0, rowspan=1337)
+
+        return window
+
+    def run(self):
+        self.window.mainloop()
+
+def main():
+    gui = GUI({"foo": 1, "bar": 2})
+    gui.run()
 
 
-window = create_window()
-
-window.mainloop()
-
+if __name__ == "__main__":
+    main()

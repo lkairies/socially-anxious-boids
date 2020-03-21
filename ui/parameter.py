@@ -5,7 +5,7 @@ class Parameter:
         self.input_field = input_field
 
     def get_value(self):
-        return self.input_field.get()
+        return float(self.input_field.get())
 
     def set_value(self, value):
-        return self.input_field.set(value)
+        return self.input_field.insert(0, str(value))
