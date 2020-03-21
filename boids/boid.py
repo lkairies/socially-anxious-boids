@@ -36,11 +36,11 @@ class Boid():
 
 
 if __name__=='__main__':
+    swarm_update = np.vectorize(Boid.update)
     swarm = np.array([Boid() for _ in range(50)])
     for time in range(100):
-        for i in range(50):
-            swarm[i].update()
-            print(swarm[i])
+        swarm_update(swarm)
+        print(swarm[0])
 
 
 # TODO 
